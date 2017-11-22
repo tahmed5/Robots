@@ -79,7 +79,7 @@ def main():
     create_gameboard()
     gameboard[x][y] = 1
     draw()
-    gameloop()
+    game()
 
 main()
 
