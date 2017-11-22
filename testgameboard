@@ -1,0 +1,85 @@
+import random
+import time
+gameboard = []
+row =  11
+column = 11
+x, y = (round(row/2) - 1),(round(column/2) - 1)
+
+def game():
+    time.sleep(0)
+    draw()
+    
+    
+def create_gameboard():
+    for width in range(column):
+        board = []
+        for length in range(row):
+            board.append(0)
+        gameboard.append(board)
+        
+def draw():
+    for rows in gameboard:
+        print(rows)
+    print('\n')
+    usermove()
+
+def collision():
+    for item in gameboard:
+        for element in item:
+            if element > 2:
+                print('Collision Detected')
+                quit
+    game()
+
+def usermove():
+    global x,y
+    
+    moves = ['W','A','S','D']
+    round_move = random.choice(moves)
+    try:        
+        if round_move == 'W':
+            gameboard[x][y] += -1
+            y = y + 1
+            gameboard[x][y]  += 1
+        if round_move == 'A':
+            gameboard[x][y] += -1
+            x = x -1
+            gameboard[x][y] += 1
+        if round_move == 'S':
+            gameboard[x][y] += -1
+            y = y - 1
+            gameboard[x][y] += 1    
+        if round_move == 'D':
+            gameboard[x][y] += -1
+            x = x + 1
+            gameboard[x][y] += 1
+    except:
+        fix()     
+    collision()
+
+def fix():
+    if x == row:
+        x = 0
+    if x == -1:
+        x = row - 1
+    if y == column:
+        y = 0
+    if y == -1:
+        y = column - 1
+    if x == row and y == row:
+        x = 0
+        y = 0
+    if x == -1 and y == -1:
+        x = row - 1
+        y = row - 1
+    print('repaired')
+    usermove()
+    
+def main():    
+    create_gameboard()
+    gameboard[x][y] = 1
+    draw()
+    gameloop()
+
+main()
+
